@@ -1,45 +1,35 @@
 import React from 'react';
-import { Paper, Text, Group, useMantineTheme } from '@mantine/core';
-import { IconAlertCircle } from '@tabler/icons-react';
+import { IconInfoCircle } from '@tabler/icons-react';
+import { motion } from 'framer-motion';
 
 /**
- * Banner to display important notices to users
+ * Subtle glass advisory shown above the analysis flow.
  */
-const NoticeBanner = () => {
-  const theme = useMantineTheme();
-
-  return (
-    <Paper
-      p="md"
-      withBorder
-      shadow="sm"
-      sx={{
-        backgroundColor: theme.colorScheme === 'dark' ? theme.colors.blue[9] : theme.colors.blue[0],
-        borderRadius: 0,
-        borderLeft: 'none',
-        borderRight: 'none',
-        marginBottom: theme.spacing.md,
-        position: 'relative',
-        zIndex: 1,
-      }}
-    >
-      <Group spacing="xs">
-        <IconAlertCircle
-          size={20}
-          color={theme.colorScheme === 'dark' ? theme.colors.blue[2] : theme.colors.blue[6]}
-        />
-        <Text
-          size="sm"
-          weight={500}
-          color={theme.colorScheme === 'dark' ? theme.white : theme.black}
-        >
-          Important Notice: The job analysis using direct links feature has been removed due to
-          stronger anti-scraping measures implemented by Indeed, LinkedIn, and other job platforms.
-          Please paste job descriptions directly instead for best results.
-        </Text>
-      </Group>
-    </Paper>
-  );
-};
+const NoticeBanner = () => (
+  <motion.div
+    initial={{ opacity: 0, y: -8 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.5 }}
+    className="jf-glass"
+    style={{
+      display: 'flex',
+      gap: 12,
+      alignItems: 'flex-start',
+      padding: '14px 18px',
+      marginBottom: 28,
+      border: '1px solid rgba(255,184,107,0.35)',
+      background: 'rgba(10, 9, 16, 0.82)',
+      backdropFilter: 'blur(22px) saturate(140%)',
+      WebkitBackdropFilter: 'blur(22px) saturate(140%)',
+    }}
+  >
+    <IconInfoCircle size={20} color="#FFB86B" style={{ flexShrink: 0, marginTop: 1 }} />
+    <span style={{ fontSize: 13.5, lineHeight: 1.55, color: '#D7DAEC' }}>
+      Heads up — analysing jobs by <strong style={{ color: '#fff' }}>direct link</strong> has been
+      retired due to anti-scraping measures on Indeed, LinkedIn and others. Paste the job description
+      directly for the best results.
+    </span>
+  </motion.div>
+);
 
 export default NoticeBanner;

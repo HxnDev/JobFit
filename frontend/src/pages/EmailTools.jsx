@@ -1,6 +1,8 @@
 import React from 'react';
 import { Container, Title, Text, Stack, Paper, Group, Divider } from '@mantine/core';
-import EmailReplyGenerator from '../components/EmailReplyGenerator';
+import { IconMail } from '@tabler/icons-react';
+import EmailReplyGenerator from '@/components/EmailReplyGenerator';
+import PageHeader from '@/components/PageHeader';
 
 const EmailTools = () => {
   // Get default language from localStorage if available
@@ -8,15 +10,13 @@ const EmailTools = () => {
 
   return (
     <Container size="lg" py="xl">
+      <PageHeader
+        title="Reply like a pro."
+        eyebrow="EMAIL TOOLS"
+        description="Professional, on-tone email replies for recruiters and hiring managers — drafted in seconds, in any language."
+        icon={<IconMail size={15} />}
+      />
       <Stack spacing="xl">
-        <div>
-          <Title order={1} align="center" color="blue">
-            Email Tools
-          </Title>
-          <Text size="lg" color="dimmed" align="center">
-            Professional communication tools to assist with your job search
-          </Text>
-        </div>
 
         <Paper shadow="md" radius="md" p="xl" withBorder>
           <Stack spacing="md">

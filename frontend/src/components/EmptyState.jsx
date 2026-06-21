@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Text, Button, useMantineTheme, Center, Group } from '@mantine/core';
 import { keyframes } from '@emotion/react';
-import { styleHelpers } from '../theme';
+import { styleHelpers } from '@/theme';
 
 // Define animations
 const fadeIn = keyframes({

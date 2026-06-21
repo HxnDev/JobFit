@@ -35,10 +35,10 @@ import {
 } from '@tabler/icons-react';
 import axios from 'axios';
 
-import PageHeader from '../components/PageHeader';
-import { MockInterviewFlow } from '../components/InterviewPreparation';
-import { InterviewFeedback } from '../components/InterviewPreparation';
-import { getApiKey } from '../utils/apiConfig';
+import PageHeader from '@/components/PageHeader';
+import { MockInterviewFlow } from '@/components/InterviewPreparation';
+import { InterviewFeedback } from '@/components/InterviewPreparation';
+import { getApiKey } from '@/utils/apiConfig';
 
 /**
  * Standalone page for interview preparation
@@ -281,7 +281,8 @@ const InterviewPrep = () => {
             <Button
               leftIcon={<IconMessageCircle size={16} />}
               variant="gradient"
-              gradient={{ from: 'indigo', to: 'cyan' }}
+              gradient={{ from: '#7B6CFF', to: '#1FE0A8' }}
+              sx={{ color: '#06070e' }}
               onClick={handleStartMockInterview}
             >
               Start Mock Interview
@@ -397,9 +398,10 @@ const InterviewPrep = () => {
   return (
     <Container size="lg" py="xl">
       <PageHeader
-        title="Interview Preparation"
-        description="Prepare for your job interviews by practicing with AI-generated questions tailored to your target role."
-        icon={<IconMessageCircle size={28} />}
+        title="Walk in ready."
+        eyebrow="INTERVIEW PREP"
+        description="Practice with AI-generated questions tailored to your exact role, run a live mock interview, and get honest feedback on every answer."
+        icon={<IconMessageCircle size={15} />}
       />
 
       <Paper withBorder p="lg" radius="md" mb="xl">

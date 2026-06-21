@@ -15,8 +15,8 @@ import {
 import { IconClipboardCheck, IconAlertCircle } from '@tabler/icons-react';
 import { useDisclosure } from '@mantine/hooks';
 import axios from 'axios';
-import { getApiUrl, getApiKey } from '../utils/apiConfig';
-import { ApiKeyContext } from '../App';
+import { getApiUrl, getApiKey } from '@/utils/apiConfig';
+import { ApiKeyContext } from '@/App';
 
 const ResumeReview = ({ jobLink, jobTitle, jobDescription, companyName, resumeFile }) => {
   const { hasApiKey, refreshApiKeyStatus } = useContext(ApiKeyContext);

@@ -15,9 +15,9 @@ import {
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IconCheck, IconCopy, IconMail } from '@tabler/icons-react';
-import LanguageSelector from './LanguageSelector';
+import LanguageSelector from '@/components/LanguageSelector';
 import axios from 'axios';
-import { getApiUrl, getApiKey } from '../utils/apiConfig';
+import { getApiUrl, getApiKey } from '@/utils/apiConfig';
 
 const EmailReplyGenerator = ({ defaultLanguage = 'en' }) => {
   const [opened, { open, close }] = useDisclosure(false);

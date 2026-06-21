@@ -37,7 +37,7 @@ import {
   IconExternalLink,
 } from '@tabler/icons-react';
 import axios from 'axios';
-import { getApiUrl, getApiKey } from '../utils/apiConfig';
+import { getApiUrl, getApiKey } from '@/utils/apiConfig';
 
 // Helper function to generate search URLs based on content
 const generateSearchUrl = (title, platform) => {

@@ -1,78 +1,86 @@
 import React from 'react';
-import { Title, Text, Group, Box, Divider, useMantineTheme, keyframes } from '@mantine/core';
-import { styleHelpers } from '../theme';
+import { Box } from '@mantine/core';
+import { motion } from 'framer-motion';
 
-// Define animation keyframes
-const fadeIn = keyframes({
-  from: { opacity: 0, transform: 'translateY(-10px)' },
-  to: { opacity: 1, transform: 'translateY(0)' },
-});
-
-const PageHeader = ({ title, description, icon, extra, withDivider = true }) => {
-  const theme = useMantineTheme();
-
-  return (
-    <Box
-      sx={{
-        animation: `${fadeIn} 0.5s ease-out`,
-        marginBottom: theme.spacing.lg,
-      }}
+/**
+ * Cinematic page header: an eyebrow chip, a large gradient title, and an
+ * optional description. Drop-in replacement for the legacy header.
+ */
+const PageHeader = ({ title, description, icon, extra, eyebrow = 'JOBFIT' }) => (
+  <Box mb={40}>
+    <motion.div
+      initial={{ opacity: 0, y: 18 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, ease: [0.2, 0.8, 0.2, 1] }}
     >
-      <Group position="apart" align="flex-start" mb={description ? 'md' : 'xs'}>
-        <Group>
-          {icon && (
-            <Box
-              sx={{
-                color: theme.colors.blue[6],
-                fontSize: '1.75rem',
-                display: 'flex',
-                alignItems: 'center',
-              }}
-            >
-              {icon}
-            </Box>
-          )}
-          <Title
-            order={1}
-            sx={{
-              fontSize: '2rem',
-              ...styleHelpers.gradientText,
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'flex-start',
+          justifyContent: 'space-between',
+          gap: 20,
+          flexWrap: 'wrap',
+        }}
+      >
+        <div>
+          <div
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 8,
+              color: '#5FFBD0',
+              letterSpacing: '0.3em',
+              fontSize: 12,
+              fontWeight: 600,
+              marginBottom: 14,
+            }}
+          >
+            {icon}
+            <span>{eyebrow}</span>
+          </div>
+          <h1
+            className="jf-display"
+            style={{
+              fontSize: 'clamp(2.1rem, 5vw, 3.2rem)',
+              lineHeight: 1.05,
+              margin: 0,
+              letterSpacing: '-0.02em',
+              color: '#fff',
             }}
           >
             {title}
-          </Title>
-        </Group>
-
+          </h1>
+        </div>
         {extra && <Box>{extra}</Box>}
-      </Group>
+      </div>
 
       {description && (
-        <Text
-          size="lg"
-          color="dimmed"
-          sx={{
-            maxWidth: 800,
-            lineHeight: 1.6,
-            animation: `${fadeIn} 0.7s ease-out`,
-            animationFillMode: 'backwards',
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.2, duration: 0.7 }}
+          style={{
+            maxWidth: 760,
+            marginTop: 18,
+            fontSize: '1.05rem',
+            lineHeight: 1.65,
+            color: 'var(--jf-text-dim)',
           }}
         >
           {description}
-        </Text>
+        </motion.p>
       )}
 
-      {withDivider && (
-        <Divider
-          my="lg"
-          sx={{
-            opacity: 0.6,
-            animation: `${fadeIn} 0.9s ease-out`,
-            animationFillMode: 'backwards',
-          }}
-        />
-      )}
-    </Box>
-  );
-};
+      <div
+        style={{
+          height: 1,
+          marginTop: 28,
+          background:
+            'linear-gradient(90deg, rgba(157,140,255,0.5), rgba(31,224,168,0.2) 40%, transparent)',
+        }}
+      />
+    </motion.div>
+  </Box>
+);
 
 export default PageHeader;

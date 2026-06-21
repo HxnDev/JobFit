@@ -24,7 +24,7 @@ import {
   IconInfoCircle,
   IconLink,
 } from '@tabler/icons-react';
-import { saveApiKey, validateApiKey } from '../utils/apiConfig';
+import { saveApiKey, validateApiKey } from '@/utils/apiConfig';
 
 /**
  * Component for managing Google Gemini API Key

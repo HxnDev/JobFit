@@ -1,7 +1,7 @@
 import { Select, Text } from '@mantine/core';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { getApiUrl, getApiKey } from '../utils/apiConfig';
+import { getApiUrl, getApiKey } from '@/utils/apiConfig';
 
 const LanguageSelector = ({ value, onChange, label = 'Language' }) => {
   const [languages, setLanguages] = useState([{ value: 'en', label: 'English' }]);

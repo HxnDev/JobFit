@@ -25,17 +25,18 @@ import {
 import axios from 'axios';
 
 // Components
-import ResumeUpload from '../components/ResumeUpload';
-import JobInputForm from '../components/JobInputForm';
-import JobResults from '../components/JobResults';
-import PageHeader from '../components/PageHeader';
-import StepCard from '../components/StepCard';
-import FancyLoader from '../components/FancyLoader';
-import ErrorDisplay from '../components/ErrorDisplay';
+import ResumeUpload from '@/components/ResumeUpload';
+import JobInputForm from '@/components/JobInputForm';
+import JobResults from '@/components/JobResults';
+import PageHeader from '@/components/PageHeader';
+import StepCard from '@/components/StepCard';
+import FancyLoader from '@/components/FancyLoader';
+import ErrorDisplay from '@/components/ErrorDisplay';
+import NoticeBanner from '@/components/NoticeBanner';
 
 // API Configuration
-import { getApiUrl, getApiKey } from '../utils/apiConfig';
-import { ApiKeyContext } from '../App';
+import { getApiUrl, getApiKey } from '@/utils/apiConfig';
+import { ApiKeyContext } from '@/App';
 
 const Home = () => {
   const theme = useMantineTheme();
@@ -187,10 +188,13 @@ const Home = () => {
     <Container size="lg" py="xl">
       {/* Page Header */}
       <PageHeader
-        title="Job Fit Analysis"
-        description="Upload your resume and add job details to analyze your match score. Our AI-powered tool will help you understand how well your skills match the positions you're interested in."
-        icon={<IconStars size={28} />}
+        title="Score your fit, instantly."
+        eyebrow="JOB FIT ANALYSIS"
+        description="Upload your resume, add the roles you're after, and let JobFit reveal exactly how well you match — the skills you've got, the gaps to close, and how to win."
+        icon={<IconStars size={15} />}
       />
+
+      <NoticeBanner />
 
       {apiKeyError && (
         <Alert icon={<IconAlertCircle size={16} />} title="API Key Error" color="red" mb="lg">
@@ -273,14 +277,15 @@ const Home = () => {
               size="lg"
               rightIcon={<IconChevronRight size={18} />}
               variant="gradient"
-              gradient={{ from: '#3498db', to: '#2E86C1' }}
+              gradient={{ from: '#7B6CFF', to: '#1FE0A8' }}
               sx={{
-                height: 50,
-                fontSize: '1.1rem',
-                transition: 'all 0.3s ease',
+                height: 54,
+                fontSize: '1.05rem',
+                color: '#06070e',
+                boxShadow: '0 10px 40px rgba(123,108,255,0.35)',
                 '&:hover:not(:disabled)': {
                   transform: 'translateY(-3px)',
-                  boxShadow: theme.shadows.md,
+                  boxShadow: '0 16px 50px rgba(123,108,255,0.5)',
                 },
               }}
             >

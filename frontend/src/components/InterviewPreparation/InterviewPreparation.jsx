@@ -28,11 +28,11 @@ import {
   IconDeviceAnalytics,
 } from '@tabler/icons-react';
 import axios from 'axios';
-import { getApiUrl, getApiKey } from '../../utils/apiConfig';
+import { getApiUrl, getApiKey } from '@/utils/apiConfig';
 
-import QuestionCard from './QuestionCard';
-import InterviewFeedback from './InterviewFeedback';
-import MockInterviewFlow from './MockInterviewFlow';
+import QuestionCard from '@/components/InterviewPreparation/QuestionCard';
+import InterviewFeedback from '@/components/InterviewPreparation/InterviewFeedback';
+import MockInterviewFlow from '@/components/InterviewPreparation/MockInterviewFlow';
 
 /**
  * Main Interview Preparation component that allows users to prepare for

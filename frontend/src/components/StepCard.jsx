@@ -1,13 +1,12 @@
 import React from 'react';
-import { Paper, Group, Title, Badge, ThemeIcon, useMantineTheme, Text, Box } from '@mantine/core';
-import { keyframes } from '@emotion/react';
+import { Group, Title, Badge } from '@mantine/core';
+import { IconCheck } from '@tabler/icons-react';
+import { motion } from 'framer-motion';
 
-// Define animation keyframes
-const slideIn = keyframes({
-  from: { opacity: 0, transform: 'translateX(-20px)' },
-  to: { opacity: 1, transform: 'translateX(0)' },
-});
-
+/**
+ * Glass step card with a gradient index medallion, an active glow ring, and a
+ * completed state. Keeps the original prop contract.
+ */
 const StepCard = ({
   title,
   stepNumber,
@@ -18,82 +17,79 @@ const StepCard = ({
   isActive = false,
   isCompleted = false,
 }) => {
-  const theme = useMantineTheme();
-
-  // Determine card style based on state
-  const getBorderColor = () => {
-    if (isActive) return theme.colors.blue[6];
-    if (isCompleted) return theme.colors.green[6];
-    return theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3];
-  };
-
-  const getBackgroundColor = () => {
-    if (isActive) return theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.blue[0];
-    if (isCompleted)
-      return theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.green[0];
-    return undefined; // Default background
-  };
-
-  // Determine icon color based on state
-  const getIconColor = () => {
-    if (isActive) return 'blue';
-    if (isCompleted) return 'green';
-    return theme.colorScheme === 'dark' ? 'gray' : 'gray';
-  };
+  const accent = isCompleted ? '#1FE0A8' : isActive ? '#9D8CFF' : 'rgba(146,142,222,0.25)';
 
   return (
-    <Paper
-      shadow="sm"
-      radius="md"
-      p="xl"
-      withBorder
-      sx={{
-        borderColor: getBorderColor(),
-        borderWidth: isActive ? '2px' : '1px',
-        backgroundColor: getBackgroundColor(),
-        transition: 'all 0.3s ease',
-        animation: `${slideIn} ${0.3 + stepNumber * 0.1}s ease-out`,
-        position: 'relative',
-        overflow: 'visible',
-        '&:hover': {
-          transform: 'translateY(-5px)',
-          boxShadow: theme.shadows.md,
-        },
-      }}
+    <motion.div
+      initial={{ opacity: 0, y: 26 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.15 }}
+      transition={{ duration: 0.6, delay: stepNumber * 0.05, ease: [0.2, 0.8, 0.2, 1] }}
+      style={{ position: 'relative' }}
     >
-      {/* Step number indicator */}
-      <Box
-        sx={{
-          position: 'absolute',
-          top: '-15px',
-          left: '20px',
-          zIndex: 2,
-          backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : 'white',
-          borderRadius: '50%',
-          padding: '2px',
+      <div
+        className="jf-glass"
+        style={{
+          position: 'relative',
+          padding: 'clamp(22px, 4vw, 34px)',
+          paddingTop: 38,
+          border: `1px solid ${isActive || isCompleted ? accent : 'rgba(146,142,222,0.14)'}`,
+          boxShadow: isActive
+            ? '0 0 0 1px rgba(157,140,255,0.25), 0 24px 70px rgba(123,108,255,0.12)'
+            : 'none',
+          transition: 'border-color 0.4s ease, box-shadow 0.4s ease',
+          overflow: 'visible',
         }}
       >
-        <ThemeIcon
-          size={30}
-          radius="xl"
-          color={getIconColor()}
-          variant={isActive || isCompleted ? 'filled' : 'light'}
+        {/* Index medallion */}
+        <div
+          style={{
+            position: 'absolute',
+            top: -20,
+            left: 26,
+            width: 40,
+            height: 40,
+            borderRadius: 13,
+            display: 'grid',
+            placeItems: 'center',
+            color: isActive || isCompleted ? '#06070e' : 'var(--jf-text-dim)',
+            background:
+              isActive || isCompleted
+                ? 'linear-gradient(135deg, #9D8CFF, #5FFBD0)'
+                : 'rgba(20,22,36,0.9)',
+            border: isActive || isCompleted ? 'none' : '1px solid rgba(146,142,222,0.25)',
+            boxShadow: isActive || isCompleted ? '0 8px 24px rgba(123,108,255,0.4)' : 'none',
+            fontFamily: 'var(--jf-font-display)',
+            fontWeight: 700,
+          }}
         >
-          {icon ? icon : <Text weight={700}>{stepNumber}</Text>}
-        </ThemeIcon>
-      </Box>
+          {isCompleted ? <IconCheck size={20} stroke={3} /> : icon || stepNumber}
+        </div>
 
-      <Group position="apart" mb="md" mt="xs">
-        <Title order={3}>{title}</Title>
-        {badge && (
-          <Badge size="lg" color={badgeColor}>
-            {badge}
-          </Badge>
-        )}
-      </Group>
+        <Group position="apart" mb="lg" mt={4} align="center">
+          <Title order={3} style={{ fontSize: 22, color: '#fff' }}>
+            {title}
+          </Title>
+          {badge && (
+            <Badge
+              size="lg"
+              variant="outline"
+              color={badgeColor}
+              styles={{
+                root: {
+                  borderColor: badgeColor === 'gray' ? 'rgba(146,142,222,0.3)' : undefined,
+                  color: badgeColor === 'gray' ? 'var(--jf-text-dim)' : undefined,
+                },
+              }}
+            >
+              {badge}
+            </Badge>
+          )}
+        </Group>
 
-      {children}
-    </Paper>
+        {children}
+      </div>
+    </motion.div>
   );
 };
 

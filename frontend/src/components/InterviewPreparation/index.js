@@ -3,7 +3,7 @@
  * Exports all components related to the interview preparation feature
  */
 
-export { default as InterviewPreparation } from './InterviewPreparation';
-export { default as QuestionCard } from './QuestionCard';
-export { default as InterviewFeedback } from './InterviewFeedback';
-export { default as MockInterviewFlow } from './MockInterviewFlow';
+export { default as InterviewPreparation } from '@/components/InterviewPreparation/InterviewPreparation';
+export { default as QuestionCard } from '@/components/InterviewPreparation/QuestionCard';
+export { default as InterviewFeedback } from '@/components/InterviewPreparation/InterviewFeedback';
+export { default as MockInterviewFlow } from '@/components/InterviewPreparation/MockInterviewFlow';

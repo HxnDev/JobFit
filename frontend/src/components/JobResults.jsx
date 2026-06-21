@@ -30,13 +30,14 @@ import {
   IconPencil,
   IconAlertCircle,
 } from '@tabler/icons-react';
-import ResumeReview from './ResumeReview';
-import LanguageSelector from './LanguageSelector';
-import ATSChecker from './ATSChecker';
-import LearningRecommender from './LearningRecommender';
-import InterviewPreparation from './InterviewPreparation/InterviewPreparation';
-import { getApiUrl, getApiKey } from '../utils/apiConfig';
-import { ApiKeyContext } from '../App';
+import ResumeReview from '@/components/ResumeReview';
+import ScoreRing from '@/components/core/ScoreRing';
+import LanguageSelector from '@/components/LanguageSelector';
+import ATSChecker from '@/components/ATSChecker';
+import LearningRecommender from '@/components/LearningRecommender';
+import InterviewPreparation from '@/components/InterviewPreparation/InterviewPreparation';
+import { getApiUrl, getApiKey } from '@/utils/apiConfig';
+import { ApiKeyContext } from '@/App';
 
 const JobResults = ({ results, resumeFile }) => {
   const { hasApiKey, refreshApiKeyStatus } = useContext(ApiKeyContext);
@@ -291,25 +292,31 @@ const JobResults = ({ results, resumeFile }) => {
   return (
     <Stack spacing="xl">
       {apiError && (
-        <Paper p="md" withBorder sx={{ backgroundColor: '#FFEAEA', borderColor: '#FF6B6B' }}>
+        <Paper
+          p="md"
+          withBorder
+          sx={{ backgroundColor: 'rgba(255,92,138,0.1)', borderColor: 'rgba(255,92,138,0.4)' }}
+        >
           <Group spacing="sm">
-            <IconAlertCircle size={24} color="#FF0000" />
-            <Text weight={500} color="#D10000">
+            <IconAlertCircle size={24} color="#FF5C8A" />
+            <Text weight={500} sx={{ color: '#FF8FB0' }}>
               {apiError}
             </Text>
           </Group>
         </Paper>
       )}
 
-      <Paper shadow="md" radius="md" p="xl" withBorder>
-        <Stack spacing="md">
-          <Title order={2} align="center" color="blue">
-            Analysis Results
-          </Title>
-          <Text align="center" color="dimmed">
-            We&apos;ve analyzed your resume against the job details you provided
+      <Paper shadow="md" radius="lg" p="xl" withBorder sx={{ textAlign: 'center' }}>
+        <Stack spacing="xs">
+          <Text
+            sx={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: '1.8rem', fontWeight: 700 }}
+            className="jf-gradient-text"
+          >
+            Your results are in
           </Text>
-          <Divider />
+          <Text align="center" color="dimmed">
+            We&apos;ve matched your resume against every role you provided
+          </Text>
         </Stack>
       </Paper>
 
@@ -317,38 +324,31 @@ const JobResults = ({ results, resumeFile }) => {
         <Paper key={index} shadow="md" radius="md" p="xl" withBorder>
           <Stack spacing="lg">
             {/* Job Header Section */}
-            <Stack spacing={4}>
-              <Group position="apart" align="center">
-                <Text size="xl" weight={700} color="blue">
+            <Group position="apart" align="center" noWrap spacing="xl">
+              <Stack spacing={6}>
+                <Text
+                  size="xl"
+                  weight={700}
+                  sx={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: '1.5rem' }}
+                  className="jf-gradient-text"
+                >
                   {job.job_title}
                 </Text>
-                <Badge
-                  size="xl"
-                  color={
-                    job.match_percentage >= 80
-                      ? 'green'
-                      : job.match_percentage >= 60
-                        ? 'yellow'
-                        : 'red'
-                  }
-                >
-                  {job.match_percentage}% MATCH
-                </Badge>
-              </Group>
-              <Group>
-                <Text size="lg" weight={600}>
-                  {job.company_name}
-                </Text>
-
-                {job.job_link && (
-                  <Tooltip label={job.job_link} position="top">
-                    <Text size="sm" color="dimmed" style={{ cursor: 'pointer' }}>
-                      {truncateUrl(job.job_link)}
-                    </Text>
-                  </Tooltip>
-                )}
-              </Group>
-            </Stack>
+                <Group spacing="xs">
+                  <Text size="lg" weight={600} color="dimmed">
+                    {job.company_name}
+                  </Text>
+                  {job.job_link && (
+                    <Tooltip label={job.job_link} position="top">
+                      <Text size="sm" color="dimmed" style={{ cursor: 'pointer', opacity: 0.7 }}>
+                        · {truncateUrl(job.job_link)}
+                      </Text>
+                    </Tooltip>
+                  )}
+                </Group>
+              </Stack>
+              <ScoreRing value={job.match_percentage} size={120} />
+            </Group>
 
             <Divider />
 

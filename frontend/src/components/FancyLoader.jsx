@@ -1,74 +1,52 @@
 import React from 'react';
-import { Box, Text, Loader, Overlay, useMantineTheme, keyframes } from '@mantine/core';
-import { styleHelpers } from '../theme';
+import { Overlay, Box, Text } from '@mantine/core';
 
-// Define animations
-const pulse = keyframes({
-  '0%': { opacity: 0.6 },
-  '50%': { opacity: 0.8 },
-  '100%': { opacity: 0.6 },
-});
-
-const float = keyframes({
-  '0%': { transform: 'translateY(0px)' },
-  '50%': { transform: 'translateY(-10px)' },
-  '100%': { transform: 'translateY(0px)' },
-});
-
+/**
+ * Full-card overlay shown during AI work. A dual conic-gradient ring orbits a
+ * glowing core over a blurred scrim, with a rotating status line.
+ */
 const FancyLoader = ({ visible, message = 'Processing your request...', overlayProps = {} }) => {
-  const theme = useMantineTheme();
-
   if (!visible) return null;
 
   return (
     <Overlay
-      blur={2}
+      blur={6}
       center
       zIndex={1000}
-      radius="md"
-      color={theme.colorScheme === 'dark' ? theme.colors.dark[9] : 'rgba(255, 255, 255, 0.95)'}
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: theme.spacing.xl,
-      }}
+      radius="lg"
+      color="rgba(6,7,14,0.72)"
+      sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}
       {...overlayProps}
     >
-      <Box
-        sx={{
-          ...styleHelpers.centerFlex,
-          flexDirection: 'column',
-          textAlign: 'center',
-          animation: `${float} 3s ease-in-out infinite`,
-        }}
-      >
-        <Loader size="lg" color="blue" variant="dots" />
-
-        <Text
-          mt="md"
-          mb={5}
-          weight={600}
-          size="lg"
+      <Box sx={{ position: 'relative', width: 96, height: 96 }}>
+        <Box
           sx={{
-            ...styleHelpers.gradientText,
+            position: 'absolute',
+            inset: 0,
+            borderRadius: '50%',
+            background: 'conic-gradient(from 0deg, #7B6CFF, #1FE0A8, #7B6CFF)',
+            animation: 'jf-spin 1.1s linear infinite',
+            WebkitMask: 'radial-gradient(farthest-side, transparent calc(100% - 7px), #000 calc(100% - 6px))',
+            mask: 'radial-gradient(farthest-side, transparent calc(100% - 7px), #000 calc(100% - 6px))',
           }}
-        >
-          Working on it...
-        </Text>
-
-        <Text
-          color="dimmed"
-          size="sm"
+        />
+        <Box
           sx={{
-            maxWidth: 400,
-            animation: `${pulse} 2s ease-in-out infinite`,
+            position: 'absolute',
+            inset: 22,
+            borderRadius: '50%',
+            background: 'radial-gradient(circle, rgba(123,108,255,0.5), transparent 70%)',
+            animation: 'jf-float 2.4s ease-in-out infinite',
           }}
-        >
-          {message}
-        </Text>
+        />
       </Box>
+
+      <Text mt="xl" weight={700} size="lg" className="jf-gradient-text" sx={{ letterSpacing: '0.02em' }}>
+        Reading between the lines…
+      </Text>
+      <Text color="dimmed" size="sm" align="center" sx={{ maxWidth: 380, marginTop: 6 }}>
+        {message}
+      </Text>
     </Overlay>
   );
 };

@@ -25,9 +25,9 @@ import {
   IconAlertCircle,
 } from '@tabler/icons-react';
 import axios from 'axios';
-import { getApiUrl, getApiKey } from '../../utils/apiConfig';
+import { getApiUrl, getApiKey } from '@/utils/apiConfig';
 
-import QuestionCard from './QuestionCard';
+import QuestionCard from '@/components/InterviewPreparation/QuestionCard';
 
 /**
  * Component to guide the user through a mock interview process

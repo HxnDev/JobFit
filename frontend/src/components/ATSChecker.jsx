@@ -30,8 +30,8 @@ import {
   IconAlertCircle,
 } from '@tabler/icons-react';
 import axios from 'axios';
-import { getApiUrl, getApiKey } from '../utils/apiConfig';
-import { ApiKeyContext } from '../App';
+import { getApiUrl, getApiKey } from '@/utils/apiConfig';
+import { ApiKeyContext } from '@/App';
 
 const ATSChecker = ({ resumeFile, jobDescription }) => {
   const { hasApiKey, refreshApiKeyStatus } = useContext(ApiKeyContext);

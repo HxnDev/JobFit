@@ -15,6 +15,7 @@ import {
   ThemeIcon,
 } from '@mantine/core';
 import { IconFileTypeDocx, IconDownload, IconCheck, IconFileText } from '@tabler/icons-react';
+import PageHeader from '@/components/PageHeader';
 
 const TemplateDownloads = () => {
   const resumeTemplates = [
@@ -55,16 +56,13 @@ const TemplateDownloads = () => {
 
   return (
     <Container size="lg" py="xl">
+      <PageHeader
+        title="Start from strong."
+        eyebrow="RESUME TEMPLATES"
+        description="Download professionally designed, ATS-friendly templates and make a great first impression from line one."
+        icon={<IconFileText size={15} />}
+      />
       <Stack spacing="xl">
-        <div>
-          <Title order={1} align="center" color="blue">
-            Resume Templates
-          </Title>
-          <Text size="lg" color="dimmed" align="center">
-            Download professionally designed templates to get started with your job search
-          </Text>
-        </div>
-
         <SimpleGrid cols={3} breakpoints={[{ maxWidth: 'sm', cols: 1 }]} spacing="lg">
           {resumeTemplates.map((template) => (
             <Card key={template.id} shadow="md" radius="md" p="md" withBorder>
@@ -83,7 +81,7 @@ const TemplateDownloads = () => {
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      backgroundColor: '#f8f9fa',
+                      background: 'linear-gradient(135deg, rgba(123,108,255,0.12), rgba(31,224,168,0.08))',
                     }}
                   >
                     <ThemeIcon size={80} radius="md" color="blue" variant="light">

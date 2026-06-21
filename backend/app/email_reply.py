@@ -7,6 +7,8 @@ from typing import Dict
 
 import google.generativeai as genai
 
+from .gemini_config import GEMINI_MODEL
+
 
 def generate_email_reply(email_content: str, reply_tone: str = "professional", language: str = "en") -> Dict[str, any]:
     """
@@ -70,7 +72,7 @@ def generate_email_reply(email_content: str, reply_tone: str = "professional", l
         """
 
         # Generate email reply
-        model = genai.GenerativeModel("gemini-2.0-flash")
+        model = genai.GenerativeModel(GEMINI_MODEL)
         model_config = {
             "temperature": 0.7,
             "top_p": 0.8,

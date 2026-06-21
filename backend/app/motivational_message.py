@@ -8,6 +8,8 @@ from typing import Any, Dict
 
 import google.generativeai as genai
 
+from .gemini_config import GEMINI_MODEL
+
 
 def generate_motivational_letter(job_details: Dict[str, str]) -> Dict[str, Any]:
     """
@@ -60,7 +62,7 @@ def generate_motivational_letter(job_details: Dict[str, str]) -> Dict[str, Any]:
         """
 
         # Generate motivational letter
-        model = genai.GenerativeModel("gemini-2.0-flash")
+        model = genai.GenerativeModel(GEMINI_MODEL)
         model_config = {
             "temperature": 0.7,
             "top_p": 0.8,

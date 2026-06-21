@@ -10,6 +10,8 @@ from typing import Any, Dict, List
 
 import google.generativeai as genai
 
+from .gemini_config import GEMINI_MODEL
+
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -134,7 +136,7 @@ def generate_learning_recommendations(skills: List[str]) -> Dict[str, Any]:
         - Use true/false without quotes for boolean values
         """
 
-        model = genai.GenerativeModel("gemini-2.0-flash")
+        model = genai.GenerativeModel(GEMINI_MODEL)
         model_config = {
             "temperature": 0.7,
             "top_p": 0.8,
@@ -342,7 +344,7 @@ def generate_detailed_learning_plan(skill: str) -> Dict[str, Any]:
         - Ensure all arrays and objects are properly formatted
         """
 
-        model = genai.GenerativeModel("gemini-2.0-flash")
+        model = genai.GenerativeModel(GEMINI_MODEL)
         model_config = {
             "temperature": 0.7,
             "top_p": 0.8,

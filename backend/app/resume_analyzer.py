@@ -13,6 +13,8 @@ from typing import BinaryIO, Dict, List, Union
 import google.generativeai as genai
 from PyPDF2 import PdfReader
 
+from .gemini_config import GEMINI_MODEL
+
 from .ats_analyzer import analyze_ats_compatibility
 
 
@@ -261,7 +263,7 @@ def generate_analysis(resume_content: str, job_details: List[Dict], custom_instr
     else:
         prompt = base_prompt
 
-    model = genai.GenerativeModel("gemini-2.0-flash")
+    model = genai.GenerativeModel(GEMINI_MODEL)
     model_config = {
         "temperature": 0.7,
         "top_p": 0.8,
@@ -427,7 +429,7 @@ def generate_resume_review(resume_content: str, job_description: str, custom_ins
         else:
             prompt = base_prompt
 
-        model = genai.GenerativeModel("gemini-2.0-flash")
+        model = genai.GenerativeModel(GEMINI_MODEL)
         response = model.generate_content(
             prompt,
             generation_config={

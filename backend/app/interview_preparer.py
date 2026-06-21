@@ -10,6 +10,8 @@ from typing import Any, Dict
 
 import google.generativeai as genai
 
+from .gemini_config import GEMINI_MODEL
+
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -92,7 +94,7 @@ def generate_interview_questions(job_details: Dict[str, str]) -> Dict[str, Any]:
         """
 
         # Generate interview questions with lower temperature for more deterministic output
-        model = genai.GenerativeModel("gemini-2.0-flash")
+        model = genai.GenerativeModel(GEMINI_MODEL)
         model_config = {
             "temperature": 0.3,  # Reduced from 0.7 to get more consistent outputs
             "top_p": 0.8,
@@ -297,7 +299,7 @@ def generate_company_research(company_name: str) -> Dict[str, Any]:
         Keep each point concise and actionable.
         """
 
-        model = genai.GenerativeModel("gemini-2.0-flash")
+        model = genai.GenerativeModel(GEMINI_MODEL)
         response = model.generate_content(prompt, generation_config={"temperature": 0.2, "max_output_tokens": 1024})
 
         if not response or not response.text:

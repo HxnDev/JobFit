@@ -10,6 +10,8 @@ from typing import Any, Dict
 
 import google.generativeai as genai
 
+from .gemini_config import GEMINI_MODEL
+
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -71,7 +73,7 @@ def analyze_ats_compatibility(resume_content: str) -> Dict[str, Any]:
         }}
         """
 
-        model = genai.GenerativeModel("gemini-2.0-flash")
+        model = genai.GenerativeModel(GEMINI_MODEL)
         model_config = {
             "temperature": 0.7,
             "top_p": 0.8,
@@ -160,7 +162,7 @@ def generate_optimized_resume_sections(resume_content: str, job_description: str
         Important: Use proper JSON formatting with double quotes around all strings and property names.
         """
 
-        model = genai.GenerativeModel("gemini-2.0-flash")
+        model = genai.GenerativeModel(GEMINI_MODEL)
         model_config = {
             "temperature": 0.7,
             "top_p": 0.8,

@@ -2,6 +2,8 @@ from typing import Any, Dict
 
 import google.generativeai as genai
 
+from .gemini_config import GEMINI_MODEL
+
 
 def generate_cover_letter(job_details: Dict[str, str], custom_instruction: str = "", language: str = "en") -> Dict[str, Any]:
     """
@@ -75,7 +77,7 @@ def generate_cover_letter(job_details: Dict[str, str], custom_instruction: str =
             prompt = base_prompt
 
         # Generate cover letter
-        model = genai.GenerativeModel("gemini-2.0-flash")
+        model = genai.GenerativeModel(GEMINI_MODEL)
         model_config = {
             "temperature": 0.7,
             "top_p": 0.8,

@@ -10,6 +10,8 @@ from typing import Any, Dict, List
 
 import google.generativeai as genai
 
+from .gemini_config import GEMINI_MODEL
+
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -77,7 +79,7 @@ def evaluate_answer(question: Dict[str, Any], answer: str) -> Dict[str, Any]:
         """
 
         # Generate evaluation
-        model = genai.GenerativeModel("gemini-2.0-flash")
+        model = genai.GenerativeModel(GEMINI_MODEL)
         model_config = {
             "temperature": 0.4,
             "top_p": 0.8,
@@ -319,7 +321,7 @@ def generate_overall_feedback(evaluations: List[Dict[str, Any]], average_score: 
         """
 
         # Generate consolidated feedback
-        model = genai.GenerativeModel("gemini-2.0-flash")
+        model = genai.GenerativeModel(GEMINI_MODEL)
         model_config = {
             "temperature": 0.4,
             "top_p": 0.8,

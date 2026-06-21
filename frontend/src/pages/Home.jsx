@@ -304,8 +304,9 @@ const Home = () => {
         {error && (
           <ErrorDisplay
             title="Analysis Error"
-            message="We encountered an issue while analyzing your resume."
+            message={error || 'We encountered an issue while analyzing your resume.'}
             error={error}
+            showDetails
             onRetry={handleAnalyze}
           />
         )}

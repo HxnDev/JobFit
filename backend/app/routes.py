@@ -36,15 +36,17 @@ def validate_api_key(api_key: str) -> bool:
     Returns:
         bool: Whether the key is valid
     """
-    # Basic validation: Check if it's a non-empty string
-    if not api_key or not isinstance(api_key, str) or not api_key.strip():
+    # Basic validation: Check it's a non-empty, whitespace-free token of
+    # reasonable length. Google issues keys with varying prefixes
+    # (e.g. "AIza…", "AQ…"), so we do NOT enforce a specific prefix here —
+    # the real validity is confirmed by the Gemini API on use.
+    if not api_key or not isinstance(api_key, str):
         return False
 
-    # Google Gemini API keys typically start with "AI"
-    if not api_key.startswith("AI"):
+    stripped = api_key.strip()
+    if len(stripped) < 20 or any(c.isspace() for c in stripped):
         return False
 
-    # Additional validation can be added here
     return True
 
 

@@ -83,7 +83,7 @@ const Landing = ({ onSaved }) => {
     e.preventDefault();
     setError('');
     if (!validateApiKey(apiKey)) {
-      setError('That doesn’t look like a Gemini key — it should start with “AI”.');
+      setError('That doesn’t look like a valid Gemini key — please paste the full key from Google AI Studio.');
       return;
     }
     setLoading(true);
@@ -353,7 +353,7 @@ const Landing = ({ onSaved }) => {
             <form onSubmit={handleSubmit} style={{ marginTop: 26 }}>
               <TextInput
                 size="md"
-                placeholder="Paste your Gemini API key (starts with AI…)"
+                placeholder="Paste your Gemini API key from Google AI Studio"
                 icon={<IconKey size={16} />}
                 value={apiKey}
                 onChange={(e) => setApiKey(e.currentTarget.value)}

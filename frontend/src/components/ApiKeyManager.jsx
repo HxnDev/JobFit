@@ -41,7 +41,7 @@ const ApiKeyManager = ({ onSaveSuccess }) => {
 
     // Validate API key format
     if (!validateApiKey(apiKey)) {
-      setError('Please enter a valid Google Gemini API key (starts with "AI")');
+      setError('Please paste the full Google Gemini API key from Google AI Studio');
       return;
     }
 
@@ -89,7 +89,7 @@ const ApiKeyManager = ({ onSaveSuccess }) => {
               <TextInput
                 required
                 label="Google Gemini API Key"
-                placeholder="Enter your API key (starts with AI...)"
+                placeholder="Enter your API key from Google AI Studio"
                 icon={<IconKey size={16} />}
                 value={apiKey}
                 onChange={(e) => setApiKey(e.currentTarget.value)}

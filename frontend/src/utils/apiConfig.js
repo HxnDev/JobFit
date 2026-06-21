@@ -52,9 +52,12 @@ export const getApiKey = () => {
  * @returns {boolean} Whether the key passes basic validation
  */
 export const validateApiKey = (apiKey) => {
-  // Basic validation: Check if the API key exists and matches expected format
-  // Gemini API keys are typically in format like "AIza..."
-  return Boolean(apiKey && typeof apiKey === 'string' && apiKey.trim() && apiKey.startsWith('AI'));
+  // Google issues Gemini keys with varying prefixes (e.g. "AIza…", "AQ…"),
+  // so we only sanity-check shape here: a non-empty, whitespace-free token of
+  // reasonable length. The real validity is confirmed by the API on use.
+  if (!apiKey || typeof apiKey !== 'string') return false;
+  const trimmed = apiKey.trim();
+  return trimmed.length >= 20 && !/\s/.test(trimmed);
 };
 
 /**

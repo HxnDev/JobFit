@@ -30,8 +30,10 @@ def create_app() -> Flask:
     if is_production:
         # In production, allow specific origins
         allowed_origins = [
-            "https://hxndev.github.io",  # GitHub Pages domain
+            "https://jobfit.hxndev.com",  # Custom domain (Vercel)
+            "https://hxndev.github.io",  # GitHub Pages domain (legacy)
             "http://localhost:5173",  # Local dev frontend (for testing)
+            r"https://.*\.vercel\.app",  # Vercel preview deployments
         ]
         CORS(app, resources={r"/api/*": {"origins": allowed_origins}}, supports_credentials=True)
     else:

@@ -4,7 +4,7 @@ JobFit reads your resume against any job, scores the match, and then writes the 
 
 It's also a statement piece: a cinematic, scroll-driven **"Neural Noir"** interface with a hand-written GLSL aurora shader, a floating 3D "intelligence core", a magnetic cursor, and buttery motion throughout.
 
-**Live Application:** [https://hxndev.github.io/JobFit/](https://hxndev.github.io/JobFit/)
+**Live Application:** [https://jobfit.hxndev.com](https://jobfit.hxndev.com)
 
 ## Highlights
 
@@ -47,7 +47,7 @@ It's also a statement piece: a cinematic, scroll-driven **"Neural Noir"** interf
 
 ## How to Use
 
-1. **Visit** the live application at [https://hxndev.github.io/JobFit/](https://hxndev.github.io/JobFit/).
+1. **Visit** the live application at [https://jobfit.hxndev.com](https://jobfit.hxndev.com).
 2. **Provide a Google Gemini API Key** when prompted (used to power the AI features).
 3. **Upload your resume** (PDF, DOCX or TXT) or paste it as text.
 4. **Enter job details** for the positions you're interested in.
@@ -80,7 +80,7 @@ JobFit uses Google's Gemini AI. You provide your own free key:
 - **Custom GLSL** — the aurora backdrop fragment shader.
 - **Framer Motion** — page transitions, reveals and the magnetic cursor.
 - **Lenis** — momentum smooth scrolling.
-- **React Router 6** — client-side routing (HashRouter for GitHub Pages).
+- **React Router 6** — client-side routing (HashRouter, so it works on any static host without rewrites).
 - **Axios** — API requests · **Tabler Icons** — iconography.
 - **ESLint + Prettier** — code quality and formatting.
 
@@ -157,7 +157,8 @@ frontend/
 
 ## Deployment
 
-Every push to `main` builds the app and publishes to GitHub Pages via GitHub Actions.
+- **Frontend** → [Vercel](https://vercel.com) at the custom domain **[jobfit.hxndev.com](https://jobfit.hxndev.com)**. The Vercel project uses `frontend/` as its **Root Directory** (framework: Vite, build: `npm run build`, output: `dist`). `frontend/.npmrc` enables `legacy-peer-deps` so installs resolve the React-18 3D stack. The app is served at the domain root, so `base` defaults to `/` (override with `VITE_BASE_PATH=/JobFit/` only for a sub-path host like GitHub Pages).
+- **Backend** → [Render](https://render.com) at `https://jobfit-backend.onrender.com`. Production CORS allows `https://jobfit.hxndev.com` (plus `*.vercel.app` previews). The Gemini model is configurable via the `GEMINI_MODEL` env var (defaults to `gemini-2.5-flash`).
 
 ## Contribute
 

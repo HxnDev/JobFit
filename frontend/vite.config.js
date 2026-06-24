@@ -9,7 +9,9 @@ export default defineConfig({
             '@': path.resolve(__dirname, './src'),
         },
     },
-    base: process.env.NODE_ENV === 'production' ? '/JobFit/' : '/', // Base path for GitHub Pages in production
+    // Served at the domain root by default (Vercel / custom domain). For a
+    // sub-path host like GitHub Pages, set VITE_BASE_PATH=/JobFit/ at build time.
+    base: process.env.VITE_BASE_PATH || '/',
     server: {
         port: 5173,
         proxy: {
